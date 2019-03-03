@@ -2,7 +2,8 @@
 'use strict'
 let symbols = new Map();
 function compile() {
-	let lines = document.querySelector("#code").value.split('\n');
+	let lines = document.querySelector("#code").value.trim()
+		.split('\n');
 	/*let cpu = {
 		pc: 0,
 		zf: false,
@@ -78,7 +79,7 @@ function tokenize_lines(lines,keywords,directives) {
 	let token_lines = [];
 
 	lines.forEach(function(elem) {
-		let token_line = tokenize(elem,
+		let token_line = tokenize(elem.trim(),
 			keywords,directives);
 		if(elem.trim()) {
 			token_lines.push(token_line);
