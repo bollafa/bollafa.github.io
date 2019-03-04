@@ -203,16 +203,31 @@ function compile_run() {
 	}
 
 
-	tick();
+	try {
+		tick();
+	}catch(error){
+		document.querySelector("#runtime_error").textContent = 
+			"Runtime " + error;
+		return;
+	}
 
 	document.querySelector("#compile_error").textContent = '';
+	document.querySelector("#runtime_error").textContent = '';
 
 
 }
 
 function tick(){
 	let old_pc = cpu.pc;
+	try{
 		ram[cpu.pc]();
+	}catch(error){
+		throw new Error("tried to execute line ("
+			+ cpu.pc 
+			+ ")"
+			+ " ( remember to put a `hlt`"
+			+ " instruction to prevent this )");
+	}
 
 		if(old_pc === cpu.pc) {
 			cpu.pc++;
