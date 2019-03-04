@@ -135,10 +135,6 @@ function parse_params(params,symbols) {
 function second_pass(tokens,symbols,keywords) {
 	let changes = [];
 	tokens.forEach(function(token,i) {
-		let params = token.instruction.directive ? 
-			0 : parse_params(token.instruction.params,symbols);
-
-		
 		if(!token.instruction.directive &&
 			keywords[token
 			.instruction
@@ -148,6 +144,9 @@ function second_pass(tokens,symbols,keywords) {
 					+"` unknown mnemonic! at line ("
 					+i+")");
 		}
+
+		let params = token.instruction.directive ? 
+			0 : parse_params(token.instruction.params,symbols);
 
 		if(!token.instruction.directive &&
 			keywords[token
