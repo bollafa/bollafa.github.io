@@ -20,6 +20,7 @@ function compile() {
 			},
 			add: function ( left,right ) {
 				ram[right] += ram[left];
+				ram[right] %= 0xFFFF+1;
 			},
 			cmp: function(left,right){
 				cpu.zf = (ram[left] === ram[right]);
